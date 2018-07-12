@@ -20,13 +20,13 @@ import android.widget.Button;
  */
 public class ReflexionInitializedAnnotationActivity extends ReflexionBaseActivity {
 
-    @ReflexionInject(resourceId = R.id.fab)
+    @ReflexionInject(resourceId = R.id.fab_custom_id)
     FloatingActionButton fab;
 
-    @ReflexionInject(resourceId = R.id.toolbar)
+    @ReflexionInject(resourceId = R.id.toolbar_custom_id)
     public Toolbar toolbar;
 
-    @ReflexionInject(resourceId = R.id.button)
+    @ReflexionInject(resourceId = R.id.button_custom_id)
     public Button button;
 
     @Override
