@@ -3,7 +3,6 @@ package com.example.djalma.reflexionapp;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
@@ -26,9 +25,22 @@ abstract public class ReflexionBaseActivity extends AppCompatActivity {
     @Override
     public void setContentView(@LayoutRes int layoutResID) {
         super.setContentView(layoutResID);
+        injectViews();
+    }
+
+    int geResorcetId(Field field) throws NoSuchFieldException, IllegalAccessException{
+        ReflexionInject inject = field.getAnnotation(ReflexionInject.class);
+        if(inject!= null){
+            return inject.resourceId();
+        }else{
+            return R.id.class.getDeclaredField(field.getName()).getInt(this);
+        }
+    }
+
+    void injectViews() {
         for(Field field : getClass ().getDeclaredFields()) {
-            boolean isSubclass = View.class.isAssignableFrom(field.getType());
-            if(isSubclass) {
+            boolean isView = View.class.isAssignableFrom(field.getType());
+            if(isView) {
                 try {
                     int id = geResorcetId(field);
                     View v = findViewById(id);
@@ -39,16 +51,21 @@ abstract public class ReflexionBaseActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-
         }
     }
 
-    int geResorcetId(Field field) throws NoSuchFieldException, IllegalAccessException{
-        ReflexionInject inject = field.getAnnotation(ReflexionInject.class);
-        if(inject!= null){
-            return inject.resourceId();
-        }else{
-            return R.id.class.getDeclaredField(field.getName()).getInt(this);
+    void inject() {
+        for(Field field : getClass ().getDeclaredFields()) {
+            boolean isView = View.class.isAssignableFrom(field.getType());
+            if(!isView) {
+                try {
+                    field.set(this, field.getType().newInstance());
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 }

@@ -7,6 +7,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 /**
  * This activity is initialized using reflextion to
@@ -18,6 +19,8 @@ public class ReflexionInitializedActivity extends ReflexionBaseActivity {
 
     FloatingActionButton fab;
     Toolbar toolbar;
+    PojoExample pojo;
+    TextView message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +34,9 @@ public class ReflexionInitializedActivity extends ReflexionBaseActivity {
                         .setAction("Action", null).show();
             }
         });
+        inject();
+        pojo.pojoName = "Pojo example message";
+        message.setText(pojo.pojoName);
     }
 
     @Override
