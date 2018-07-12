@@ -1,34 +1,50 @@
 package com.example.djalma.reflexionapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 
 /**
  * This activity is initialized using reflextion to
  * inject views on instance attributes.
  * The attributes are initialized finding xml node defineds in content view
  * by name. {@link ReflexionBaseActivity} defines the attribute search and initialization
+ * Annotations are used to permits define the resource names. If you don't want use annotations
+ * use @{@link ReflexionInitializedActivity} example
  */
-public class ReflexionInitializedActivity extends ReflexionBaseActivity {
+public class ReflexionInitializedAnnotationActivity extends ReflexionBaseActivity {
 
+    @ReflexionInject(resourceId = R.id.fab)
     FloatingActionButton fab;
-    Toolbar toolbar;
+
+    @ReflexionInject(resourceId = R.id.toolbar)
+    public Toolbar toolbar;
+
+    @ReflexionInject(resourceId = R.id.button)
+    public Button button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_initialized_with_only_reflexion);
+        setContentView(R.layout.activity_initialized_with_annotation_reflexion);
         setSupportActionBar(toolbar);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+            }
+        });
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(ReflexionInitializedAnnotationActivity.this, ReflexionInitializedActivity.class));
             }
         });
     }

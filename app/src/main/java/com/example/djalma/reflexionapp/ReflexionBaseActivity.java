@@ -3,9 +3,20 @@ package com.example.djalma.reflexionapp;
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import java.lang.reflect.Field;
 
-public class ReflexionBaseActivity extends AppCompatActivity {
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.lang.reflect.Field;
+import static java.lang.annotation.ElementType.FIELD;
+
+abstract public class ReflexionBaseActivity extends AppCompatActivity {
+
+    @Retention(RetentionPolicy.RUNTIME)
+    @Target(value=FIELD)
+    public @interface ReflexionInject{
+        int resourceId();
+    }
 
     /**
      * Auto Initialize your fields
@@ -19,7 +30,8 @@ public class ReflexionBaseActivity extends AppCompatActivity {
             boolean isSubclass = View.class.isAssignableFrom(field.getType());
             if(isSubclass) {
                 try {
-                    View v = findViewById(R.id.class.getDeclaredField(field.getName()).getInt(this));
+                    int id = geResorcetId(field);
+                    View v = findViewById(id);
                     field.set(this, v);
                 } catch (NoSuchFieldException e) {
                     e.printStackTrace();
@@ -28,6 +40,15 @@ public class ReflexionBaseActivity extends AppCompatActivity {
                 }
             }
 
+        }
+    }
+
+    int geResorcetId(Field field) throws NoSuchFieldException, IllegalAccessException{
+        ReflexionInject inject = field.getAnnotation(ReflexionInject.class);
+        if(inject!= null){
+            return inject.resourceId();
+        }else{
+            return R.id.class.getDeclaredField(field.getName()).getInt(this);
         }
     }
 }
