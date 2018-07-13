@@ -26,7 +26,7 @@ public class ReflexionInitializedAnnotationActivity extends ReflexionBaseActivit
     @ReflexionInject(resourceId = R.id.toolbar_custom_id)
     public Toolbar toolbar;
 
-    @ReflexionInject(resourceId = R.id.button_custom_id)
+    @ReflexionInject(resourceId = R.id.button_custom_id, onClickName = "buttonClick")
     public Button button;
 
     @Override
@@ -41,12 +41,10 @@ public class ReflexionInitializedAnnotationActivity extends ReflexionBaseActivit
                         .setAction("Action", null).show();
             }
         });
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(ReflexionInitializedAnnotationActivity.this, ReflexionInitializedActivity.class));
-            }
-        });
+    }
+
+    public void buttonClick(View v) {
+        startActivity(new Intent(ReflexionInitializedAnnotationActivity.this, ReflexionInitializedActivity.class));
     }
 
     @Override

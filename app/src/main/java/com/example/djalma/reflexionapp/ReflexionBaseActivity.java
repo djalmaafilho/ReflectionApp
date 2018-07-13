@@ -7,6 +7,7 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import static java.lang.annotation.ElementType.FIELD;
 
 abstract public class ReflexionBaseActivity extends AppCompatActivity {
@@ -15,6 +16,7 @@ abstract public class ReflexionBaseActivity extends AppCompatActivity {
     @Target(value=FIELD)
     public @interface ReflexionInject{
         int resourceId();
+        String onClickName() default "";
     }
 
     /**
@@ -28,7 +30,7 @@ abstract public class ReflexionBaseActivity extends AppCompatActivity {
         injectViews();
     }
 
-    int geResorcetId(Field field) throws NoSuchFieldException, IllegalAccessException{
+    int getResourceId(Field field) throws NoSuchFieldException, IllegalAccessException{
         ReflexionInject inject = field.getAnnotation(ReflexionInject.class);
         if(inject!= null){
             return inject.resourceId();
@@ -42,15 +44,42 @@ abstract public class ReflexionBaseActivity extends AppCompatActivity {
             boolean isView = View.class.isAssignableFrom(field.getType());
             if(isView) {
                 try {
-                    int id = geResorcetId(field);
+                    int id = getResourceId(field);
                     View v = findViewById(id);
                     field.set(this, v);
+                    injectOnClickListener(this, v, field);
                 } catch (NoSuchFieldException e) {
                     e.printStackTrace();
                 } catch (IllegalAccessException e) {
                     e.printStackTrace();
                 }
             }
+        }
+    }
+
+    /**
+     * This method injects dynamically onclick listeners
+     * @param instance
+     * @param v
+     * @param field
+     */
+    void injectOnClickListener(final Object instance, View v, final Field field) {
+        final ReflexionInject inject = field.getAnnotation(ReflexionInject.class);
+        if(inject!= null){
+            final String methodName = inject.onClickName();
+            if(methodName.trim().isEmpty())return;
+            v.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    try {
+                        Method method = instance.getClass().getDeclaredMethod(methodName, View.class);
+                        method.setAccessible(true);
+                        method.invoke(instance, v);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                }
+            });
         }
     }
 
