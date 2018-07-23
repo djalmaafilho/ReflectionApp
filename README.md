@@ -1,4 +1,4 @@
-# ReflexionApp
+# ReflectionApp
 Android Application to experiment Reflexion Concepts
 
 This project has examples how to use reflexion in java to improve Android Applications
