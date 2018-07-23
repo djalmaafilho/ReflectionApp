@@ -1,5 +1,5 @@
 # ReflectionApp
-Android Application to experiment Reflexion Concepts
+Android Application to experiment Reflection Concepts
 
 This project has examples how to use reflexion in java to improve Android Applications
 
@@ -9,4 +9,4 @@ This project has examples how to use reflexion in java to improve Android Applic
 <br/>
 3 - Dependency injection with custom annotation
 <br/>
-4 - OnClickListner Injection With custon Annotation 
+4 - OnClickListner Injection With custon Annotation
