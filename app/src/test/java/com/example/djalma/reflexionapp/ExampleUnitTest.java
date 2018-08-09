@@ -22,5 +22,11 @@ public class ExampleUnitTest {
         assertNotNull(injectedExample.personGroup.getDefaultPersonList());
         assertNotNull(injectedExample.personGroup.getPerson());
         assertNotNull(injectedExample.personGroup.getPerson().name);
+
+        assertNotNull(injectedExample.annotedPersonGroup);
+        assertNotNull(injectedExample.annotedPersonGroup.getAnnotedPersonList());
+        assertNotNull(injectedExample.annotedPersonGroup.getDefaultPersonList());
+        assertNotNull(injectedExample.annotedPersonGroup.getPerson());
+        assertNotNull(injectedExample.annotedPersonGroup.getPerson().name);
     }
 }

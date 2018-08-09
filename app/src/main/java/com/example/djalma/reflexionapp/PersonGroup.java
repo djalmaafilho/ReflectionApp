@@ -8,6 +8,7 @@ import java.util.ArrayList;
 @ReflectionInjector.ReflexionInjectClass
 public class PersonGroup {
 
+    @ReflectionInjector.ReflexionInjectParams(factory = ArrayListFactory.class)
     private ArrayList<Person> annotedPersonList;
 
     private ArrayList<Person> defaultPersonList;
