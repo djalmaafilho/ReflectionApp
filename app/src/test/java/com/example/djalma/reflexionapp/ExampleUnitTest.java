@@ -10,8 +10,17 @@ import static org.junit.Assert.*;
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
 public class ExampleUnitTest {
+
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
+    public void testReflectionInjection() {
+
+        InjectedExample injectedExample = new InjectedExample();
+        ReflectionInjector.injectRecursive(injectedExample);
+        assertNotNull(injectedExample);
+        assertNotNull(injectedExample.personGroup);
+        assertNotNull(injectedExample.personGroup.getAnnotedPersonList());
+        assertNotNull(injectedExample.personGroup.getDefaultPersonList());
+        assertNotNull(injectedExample.personGroup.getPerson());
+        assertNotNull(injectedExample.personGroup.getPerson().name);
     }
 }
