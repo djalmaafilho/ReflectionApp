@@ -9,6 +9,9 @@ import static java.lang.annotation.ElementType.TYPE;
 
 /**
  * Created by dpassos.
+ * With this class is possible instanciate all class declared fiels.
+ * Use  @{@link ReflexionInjectParams} to customize factory to inicialization or avoid initialization strategy
+ * Use @{@link ReflexionInjectClass} to inform the Injector to consider you complex field type on recursive initialization
  */
 public class ReflectionInjector{
 
