@@ -5,6 +5,6 @@ package com.example.djalma.reflexionapp;
  */
 @ReflectionInjector.ReflexionInjectClass
 public class Person {
-    int age;
-    String name;
+    public int age;
+    public String name;
 }

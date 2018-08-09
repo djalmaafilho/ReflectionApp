@@ -5,7 +5,7 @@
     android:id="@+id/coordinatorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ReflexionInitializedActivity">
+    tools:context=".view.ReflexionInitializedActivity">
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -48,6 +48,29 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.986" />
+
+    <Button
+        android:id="@+id/button_custom_injector"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp"
+        android:text="OPEN CUSTOM INJECTOR EXAMPLE"
+        app:layout_constraintBottom_toTopOf="@+id/button_custom_id"
+        />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="336dp"
+        android:layout_height="78dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="This Activity was initialized with dependency injection using custom annotation and reflection"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
 
 </android.support.constraint.ConstraintLayout>

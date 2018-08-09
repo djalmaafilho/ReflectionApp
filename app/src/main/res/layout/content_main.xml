@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".ReflexionInitializedActivity"
+    tools:context=".view.ReflexionInitializedActivity"
     tools:showIn="@layout/activity_initialized_with_only_reflexion">
 
     <TextView

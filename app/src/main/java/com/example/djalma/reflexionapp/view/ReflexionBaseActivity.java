@@ -1,8 +1,11 @@
-package com.example.djalma.reflexionapp;
+package com.example.djalma.reflexionapp.view;
 
 import android.support.annotation.LayoutRes;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+
+import com.example.djalma.reflexionapp.R;
+
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;

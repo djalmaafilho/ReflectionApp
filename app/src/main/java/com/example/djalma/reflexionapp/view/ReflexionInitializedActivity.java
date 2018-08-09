@@ -1,38 +1,34 @@
-package com.example.djalma.reflexionapp;
+package com.example.djalma.reflexionapp.view;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
+import android.widget.TextView;
+
+import com.example.djalma.reflexionapp.PojoExample;
+import com.example.djalma.reflexionapp.R;
 
 /**
  * This activity is initialized using reflextion to
  * inject views on instance attributes.
  * The attributes are initialized finding xml node defineds in content view
  * by name. {@link ReflexionBaseActivity} defines the attribute search and initialization
- * Annotations are used to permits define the resource names. If you don't want use annotations
- * use @{@link ReflexionInitializedActivity} example
  */
-public class ReflexionInitializedAnnotationActivity extends ReflexionBaseActivity {
+public class ReflexionInitializedActivity extends ReflexionBaseActivity {
 
-    @ReflexionInject(resourceId = R.id.fab_custom_id)
     FloatingActionButton fab;
-
-    @ReflexionInject(resourceId = R.id.toolbar_custom_id)
-    public Toolbar toolbar;
-
-    @ReflexionInject(resourceId = R.id.button_custom_id, onClickName = "buttonClick")
-    public Button button;
+    Toolbar toolbar;
+    PojoExample pojo;
+    TextView message;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_initialized_with_annotation_reflexion);
+        setContentView(R.layout.activity_initialized_with_only_reflexion);
         setSupportActionBar(toolbar);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,10 +37,9 @@ public class ReflexionInitializedAnnotationActivity extends ReflexionBaseActivit
                         .setAction("Action", null).show();
             }
         });
-    }
-
-    public void buttonClick(View v) {
-        startActivity(new Intent(ReflexionInitializedAnnotationActivity.this, ReflexionInitializedActivity.class));
+        inject();
+        pojo.pojoName = "Pojo example message";
+        message.setText(pojo.pojoName);
     }
 
     @Override
