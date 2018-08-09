@@ -10,3 +10,5 @@ This project has examples how to use reflexion in java to improve Android Applic
 3 - Dependency injection with custom annotation
 <br/>
 4 - OnClickListner Injection With custon Annotation
+<br/>
+5 - Simple recursive dependency injector. Suport to annotation and custom factories.
